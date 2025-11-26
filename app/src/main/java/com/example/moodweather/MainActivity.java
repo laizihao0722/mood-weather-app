@@ -14,10 +14,10 @@ public class MainActivity extends AppCompatActivity {
 
     // 🌟 情绪 -> 随机天气描述
     private HashMap<String, List<String>> moodToWeather = new HashMap<>() {{
-        put("开心", Arrays.asList(
+        put("好开心", Arrays.asList(
                 "阳光彩虹 ☀️🌈", "棉花糖云朵 ☁️🍬", "星星烟花 ✨🎆", "彩虹滑梯 🌈🛝"
         ));
-        put("难过", Arrays.asList(
+        put("好难过", Arrays.asList(
                 "毛毛雨 🌧️💧", "乌云密布 ☁️⛈️", "雪花飘落 ❄️🌨️", "微风安慰 🍃💭"
         ));
         put("愤怒", Arrays.asList(
