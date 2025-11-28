@@ -1,0 +1,103 @@
+package com.example.moodweather;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.view.View;
+import androidx.fragment.app.Fragment;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+public class HomeFragment extends Fragment {
+    private TextView tvResult;
+    private final Random random = new Random();
+
+    // 情绪 -> 随机天气描述
+    private final HashMap<String, List<String>> moodToWeather = new HashMap<>();
+
+    // 情绪 -> 随机 Emoji 组合
+    private final HashMap<String, List<String>> moodToEmoji = new HashMap<>();
+
+    // 情绪 -> 随机建议
+    private final HashMap<String, List<String>> moodToSuggestions = new HashMap<>();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // 初始化数据
+        initData();
+
+        // 初始化UI
+        initUI(view);
+
+        return view;
+    }
+
+    private void initData() {
+        moodToWeather.put("开心", Arrays.asList("阳光彩虹 ☀️🌈", "棉花糖云朵 ☁️🍬", "星星烟花 ✨🎆", "彩虹滑梯 🌈🛝"));
+        moodToWeather.put("难过", Arrays.asList("毛毛雨 🌧️💧", "乌云密布 ☁️⛈️", "雪花飘落 ❄️🌨️", "微风安慰 🍃💭"));
+        moodToWeather.put("愤怒", Arrays.asList("火山爆发 🌋🔥", "雷电交加 ⚡🌩️", "龙卷风 🌪️💨", "岩浆喷射 🌋💢"));
+        moodToWeather.put("困倦", Arrays.asList("午睡云朵 ☁️😴", "月光摇篮 🌙🛏️", "暖炉时光 🔥🪑", "咖啡雾气 ☕🌫️"));
+        moodToWeather.put("崩溃", Arrays.asList("暴风雨 ⛈️💥", "地震摇晃 🌍📳", "海啸来袭 🌊💦", "陨石坠落 ☄️💥"));
+
+        moodToEmoji.put("开心", Arrays.asList("😊✨", "🌟🎉", "🌈💖"));
+        moodToEmoji.put("难过", Arrays.asList("😢💧", "🥺🕊️", "😭☔"));
+        moodToEmoji.put("愤怒", Arrays.asList("😠⚡", "👹🔥", "💢🗿"));
+        moodToEmoji.put("困倦", Arrays.asList("🥱😴", "🌙💤", "🛌🐑"));
+        moodToEmoji.put("崩溃", Arrays.asList("🤯💥", "😵⚠️", "🆘🚨"));
+
+        moodToSuggestions.put("开心", Arrays.asList("去公园散步 🌳", "和朋友分享快乐 🤗", "吃块巧克力 🍫", "听欢快的歌 🎵"));
+        moodToSuggestions.put("难过", Arrays.asList("喝杯热茶 🍵", "写日记释放情绪 📝", "听舒缓音乐 🎶", "抱抱毛绒玩具 🧸"));
+        moodToSuggestions.put("愤怒", Arrays.asList("深呼吸 10 次 🫁", "去跑步发泄 🏃", "撕废纸发泄 📄", "冷静 5 分钟 ⏳"));
+        moodToSuggestions.put("困倦", Arrays.asList("小睡 20 分钟 😴", "喝杯咖啡 ☕", "听轻音乐 🎵", "拉伸身体 🧘"));
+        moodToSuggestions.put("崩溃", Arrays.asList("找朋友倾诉 🗣️", "写下来再撕掉 📝", "深呼吸 20 次 🫁", "洗个热水澡 🚿"));
+    }
+
+    private void initUI(View view) {
+        tvResult = view.findViewById(R.id.tvResult);
+
+        // 🎯 情绪按钮点击事件
+        Button btnHappy = view.findViewById(R.id.btnHappy);
+        Button btnSad = view.findViewById(R.id.btnSad);
+        Button btnAngry = view.findViewById(R.id.btnAngry);
+        Button btnTired = view.findViewById(R.id.btnTired);
+        Button btnStress = view.findViewById(R.id.btnStress);
+
+        btnHappy.setOnClickListener(v -> showMoodResult("开心"));
+        btnSad.setOnClickListener(v -> showMoodResult("难过"));
+        btnAngry.setOnClickListener(v -> showMoodResult("愤怒"));
+        btnTired.setOnClickListener(v -> showMoodResult("困倦"));
+        btnStress.setOnClickListener(v -> showMoodResult("崩溃"));
+    }
+
+    private void showMoodResult(String mood) {
+        List<String> weathers = moodToWeather.get(mood);
+        List<String> emojis = moodToEmoji.get(mood);
+        List<String> suggestions = moodToSuggestions.get(mood);
+
+        // 随机选择
+        String randomWeather = weathers.get(random.nextInt(weathers.size()));
+        String randomEmoji = emojis.get(random.nextInt(emojis.size()));
+        String randomSuggestion = suggestions.get(random.nextInt(suggestions.size()));
+
+        // 组合结果
+        String result = randomEmoji + " " + randomWeather + "！\n\n" +
+                "今日幸运建议：" + randomSuggestion + "\n\n" +
+                "🌤️ 你的情绪天气已生成！";
+
+        tvResult.setText(result);
+
+        //保存到历史记录
+        saveToHistory(mood, randomWeather, randomEmoji, randomSuggestion);
+    }
+
+    private void saveToHistory(String mood, String weather, String emoji, String suggestion) {
+
+    }
+}
