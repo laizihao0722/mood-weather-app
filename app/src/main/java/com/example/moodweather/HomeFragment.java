@@ -5,15 +5,21 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View;
 import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
+    private HistoryViewModel historyViewModel;
     private TextView tvResult;
     private final Random random = new Random();
 
@@ -27,12 +33,21 @@ public class HomeFragment extends Fragment {
     private final HashMap<String, List<String>> moodToSuggestions = new HashMap<>();
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 确保在 Fragment 存活期间 ViewModel 实例不变
+        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+        initData(); // 初始化映射数据
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // 初始化数据
         initData();
-
+        //初始化 ViewModel
+        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
         // 初始化UI
         initUI(view);
 
@@ -86,6 +101,28 @@ public class HomeFragment extends Fragment {
         String randomEmoji = emojis.get(random.nextInt(emojis.size()));
         String randomSuggestion = suggestions.get(random.nextInt(suggestions.size()));
 
+        String weatherLabelForDB;
+        switch (mood) {
+            case "开心":
+                weatherLabelForDB = "Sunny";
+                break;
+            case "难过":
+                weatherLabelForDB = "Rainy";
+                break;
+            case "愤怒":
+                weatherLabelForDB = "Stormy";
+                break;
+            case "困倦":
+                weatherLabelForDB = "Cloudy";
+                break;
+            case "崩溃":
+                weatherLabelForDB = "Typhoon";
+                break;
+            default:
+                weatherLabelForDB = "Neutral";
+                break;
+        }
+
         // 组合结果
         String result = randomEmoji + " " + randomWeather + "！\n\n" +
                 "今日幸运建议：" + randomSuggestion + "\n\n" +
@@ -94,10 +131,20 @@ public class HomeFragment extends Fragment {
         tvResult.setText(result);
 
         //保存到历史记录
-        saveToHistory(mood, randomWeather, randomEmoji, randomSuggestion);
+        recordMood(mood, weatherLabelForDB);
     }
 
-    private void saveToHistory(String mood, String weather, String emoji, String suggestion) {
+    private void recordMood(String mood, String weatherType) {
+        // 1. 获取当前时间戳
+        long timestamp = System.currentTimeMillis();
 
+        // 2. 创建 MoodEntry 对象
+        MoodEntry newEntry = new MoodEntry(timestamp, mood, weatherType);
+
+        // 3. 调用 ViewModel 的 insert 方法将数据异步插入数据库
+        historyViewModel.insert(newEntry);
+
+        // 4. 用户反馈
+        Toast.makeText(getContext(), "心情记录成功: " + mood + " / " + weatherType, Toast.LENGTH_SHORT).show();
     }
 }
