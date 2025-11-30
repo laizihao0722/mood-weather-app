@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
@@ -33,6 +35,13 @@ public class HistoryFragment extends Fragment {
     private PieChart pieChart;
     private BarChart barChart;
     private HistoryViewModel historyViewModel;
+    //新增 UI 控件和状态变量
+    private Button btnSwitchToday;
+    private Button btnSwitchWeekly;
+    private TextView tvReportTitle;
+
+    private enum ReportPeriod { TODAY, WEEKLY }
+    private ReportPeriod currentPeriod = ReportPeriod.TODAY;
 
     public HistoryFragment() {
         // 空构造函数
@@ -58,32 +67,98 @@ public class HistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // 1. 绑定布局文件：这一行是将XML文件加载到Fragment中
+        // 绑定布局文件：这一行是将XML文件加载到Fragment中
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        // 2. 查找XML中定义的图表控件，通过ID关联起来
+        // 查找XML中定义的图表控件，通过ID关联起来
         pieChart = view.findViewById(R.id.pieChartMoods);
         barChart = view.findViewById(R.id.barChartWeather);
 
-        // 3. 自动调用方法填充数据和配置图表
-        // 初始化 ViewModel
+        // 初始化新增的 UI 控件
+        btnSwitchToday = view.findViewById(R.id.btnSwitchToday);
+        btnSwitchWeekly = view.findViewById(R.id.btnSwitchWeekly);
+        tvReportTitle = view.findViewById(R.id.tvReportTitle);
+
         historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
 
-        // 观察情绪统计数据的变化
-        historyViewModel.emotionStats.observe(getViewLifecycleOwner(), moodStatsList -> {
-            // 数据变化时，更新饼图
-            setupPieChart(moodStatsList);
-        });
+        // 设置切换按钮的监听器
+        btnSwitchToday.setOnClickListener(v -> switchReportPeriod(ReportPeriod.TODAY));
+        btnSwitchWeekly.setOnClickListener(v -> switchReportPeriod(ReportPeriod.WEEKLY));
 
-        // 观察天气统计数据的变化
-        historyViewModel.weatherStats.observe(getViewLifecycleOwner(), weatherStatsList -> {
-            // 数据变化时，更新柱状图
-            setupBarChart(weatherStatsList);
-        });
+        // 统一设置 LiveData 观察者
+        setupObservers();
+
+        // 启动时默认显示今日统计
+        switchReportPeriod(ReportPeriod.TODAY);
 
         return view;
     }
 
+    // 统一设置 LiveData 观察者
+    private void setupObservers() {
+        // 观察今日数据
+        historyViewModel.todayEmotionStats.observe(getViewLifecycleOwner(), moodStatsList -> {
+            if (currentPeriod == ReportPeriod.TODAY) {
+                setupPieChart(moodStatsList);
+            }
+        });
+
+        historyViewModel.todayWeatherStats.observe(getViewLifecycleOwner(), weatherStatsList -> {
+            if (currentPeriod == ReportPeriod.TODAY) {
+                setupBarChart(weatherStatsList);
+            }
+        });
+
+        // 观察周报数据
+        historyViewModel.weeklyEmotionStats.observe(getViewLifecycleOwner(), moodStatsList -> {
+            if (currentPeriod == ReportPeriod.WEEKLY) {
+                setupPieChart(moodStatsList);
+            }
+        });
+
+        historyViewModel.weeklyWeatherStats.observe(getViewLifecycleOwner(), weatherStatsList -> {
+            if (currentPeriod == ReportPeriod.WEEKLY) {
+                setupBarChart(weatherStatsList);
+            }
+        });
+    }
+
+    // 切换报告周期
+    private void switchReportPeriod(ReportPeriod period) {
+        if (currentPeriod == period) return; // 避免重复切换
+
+        currentPeriod = period;
+
+        // 更新 UI 标题和按钮颜色
+        if (period == ReportPeriod.TODAY) {
+            tvReportTitle.setText("今日情绪分布");
+            btnSwitchToday.setBackgroundColor(Color.parseColor("#42A5F5")); // 选中色
+            btnSwitchWeekly.setBackgroundColor(Color.GRAY); // 未选中色
+
+            // 立即刷新图表
+            if (historyViewModel.todayEmotionStats.getValue() != null) {
+                setupPieChart(historyViewModel.todayEmotionStats.getValue());
+                setupBarChart(historyViewModel.todayWeatherStats.getValue());
+            } else {
+                setupPieChart(new ArrayList<>());
+                setupBarChart(new ArrayList<>());
+            }
+
+        } else if (period == ReportPeriod.WEEKLY) {
+            tvReportTitle.setText("历史周报情绪分布 (过去 7 天)");
+            btnSwitchToday.setBackgroundColor(Color.GRAY); // 未选中色
+            btnSwitchWeekly.setBackgroundColor(Color.parseColor("#42A5F5")); // 选中色
+
+            // 立即刷新图表
+            if (historyViewModel.weeklyEmotionStats.getValue() != null) {
+                setupPieChart(historyViewModel.weeklyEmotionStats.getValue());
+                setupBarChart(historyViewModel.weeklyWeatherStats.getValue());
+            } else {
+                setupPieChart(new ArrayList<>());
+                setupBarChart(new ArrayList<>());
+            }
+        }
+    }
 
     // --- 饼图 (情绪分布) 逻辑 ---
     private void setupPieChart(List<MoodStats> moodStatsList) {
@@ -113,7 +188,7 @@ public class HistoryFragment extends Fragment {
 
         // 配置和刷新图表
         pieChart.getDescription().setEnabled(false);
-        pieChart.setCenterText("本月心情");
+        pieChart.setCenterText("你的心情");
         pieChart.setCenterTextSize(16f);
         pieChart.animateY(1000);
         pieChart.invalidate();
@@ -139,7 +214,7 @@ public class HistoryFragment extends Fragment {
             }
         }
 
-        BarDataSet dataSet = new BarDataSet(entries, "出现天数");
+        BarDataSet dataSet = new BarDataSet(entries, "出现次数");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(Color.BLACK);
 
