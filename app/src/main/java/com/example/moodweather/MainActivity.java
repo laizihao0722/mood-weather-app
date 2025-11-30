@@ -10,6 +10,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //设置主题
+        String currentTheme = ThemeManager.loadTheme(this);
+        setTheme(ThemeManager.getThemeResId(currentTheme));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

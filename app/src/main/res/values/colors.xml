@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="healing_primary">#A3D4A3</color>
+    <color name="healing_background">#F0FFF0</color>
+
+    <color name="dark_primary">#333333</color>
+    <color name="dark_background">#121212</color>
+    <color name="dark_dialog_background">#2C2C2C</color>
+
+    <color name="energy_primary">#FF6F00</color>
+    <color name="energy_background">#FFF8E1</color>
 </resources>
