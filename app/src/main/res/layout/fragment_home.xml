@@ -80,6 +80,7 @@
         android:textSize="16sp"
         android:gravity="center"
         android:padding="15dp"
-        android:background="#f0f0f0"
+        android:background="?attr/customCardBackground"
+        android:textColor="?attr/textColorPrimary"
         android:minHeight="100dp" />
 </LinearLayout>

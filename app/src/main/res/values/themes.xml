@@ -11,13 +11,13 @@
     <attr name="backgroundColor" format="color" />
     <attr name="textColorPrimary" format="color" />
     <attr name="primaryColor" format="color" />
-    <attr name="dialogBackgroundColor" format="color" />
+    <attr name="customCardBackground" format="color" />
 
     <style name="Theme.MoodWeather.Healing" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="backgroundColor">@color/healing_background</item>
         <item name="textColorPrimary">@color/black</item>
         <item name="primaryColor">@color/healing_primary</item>
-        <item name="dialogBackgroundColor">@color/white</item>
+        <item name="customCardBackground">@color/white</item>
 
         <item name="colorPrimary">@color/healing_primary</item>
         <item name="colorSecondary">@color/healing_primary</item>
@@ -28,7 +28,7 @@
         <item name="backgroundColor">@color/dark_background</item>
         <item name="textColorPrimary">@color/white</item>
         <item name="primaryColor">@color/dark_primary</item>
-        <item name="dialogBackgroundColor">@color/dark_dialog_background</item>
+        <item name="customCardBackground">#2E2E2E</item>
 
         <item name="colorPrimary">@color/dark_primary</item>
         <item name="colorSecondary">@color/white</item>
@@ -39,7 +39,7 @@
         <item name="backgroundColor">@color/energy_background</item>
         <item name="textColorPrimary">@color/black</item>
         <item name="primaryColor">@color/energy_primary</item>
-        <item name="dialogBackgroundColor">@color/white</item>
+        <item name="customCardBackground">@color/white</item>
 
         <item name="colorPrimary">@color/energy_primary</item>
         <item name="colorSecondary">@color/energy_primary</item>
