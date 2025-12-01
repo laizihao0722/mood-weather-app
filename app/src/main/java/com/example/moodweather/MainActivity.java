@@ -6,7 +6,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNav;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +28,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBottomNavigation() {
+        BottomNavigationView bottomNav;
         bottomNav = findViewById(R.id.bottom_navigation);
 
         // 设置菜单资源
         //bottomNav.inflateMenu(R.menu.bottom_nav_menu);
 
         bottomNav.setOnItemSelectedListener(item -> {
+            //点击对应按钮跳转界面
             if (item.getItemId() == R.id.navigation_home) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new HomeFragment())
+                        .commit();
+                return true;
+            } else if(item.getItemId() == R.id.navigation_advice){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new AdviceFragment())
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.navigation_history) {
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             }
-            return false; // 默认返回false
+            return false;
         });
     }
 }
