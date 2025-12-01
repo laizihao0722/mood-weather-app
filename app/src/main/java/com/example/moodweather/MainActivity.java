@@ -4,9 +4,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SuggestionNavigator {
 
-
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +28,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBottomNavigation() {
-        BottomNavigationView bottomNav;
         bottomNav = findViewById(R.id.bottom_navigation);
 
         // 设置菜单资源
         //bottomNav.inflateMenu(R.menu.bottom_nav_menu);
 
         bottomNav.setOnItemSelectedListener(item -> {
-            //点击对应按钮跳转界面
             if (item.getItemId() == R.id.navigation_home) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new HomeFragment())
                         .commit();
                 return true;
-            } else if(item.getItemId() == R.id.navigation_advice){
+            } else if (item.getItemId() == R.id.navigation_advice) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new AdviceFragment())
+                        .replace(R.id.fragment_container, new Suggestion1Fragment())
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.navigation_history) {
@@ -57,7 +55,23 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             }
-            return false;
+            return false; // 默认返回false
         });
+    }
+
+    @Override
+    public void navigateToSuggestion2() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion2Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void navigateToSuggestion5() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion5Fragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

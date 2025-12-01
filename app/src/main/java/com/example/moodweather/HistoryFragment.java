@@ -131,7 +131,7 @@ public class HistoryFragment extends Fragment {
 
         // 更新 UI 标题和按钮颜色
         if (period == ReportPeriod.TODAY) {
-            tvReportTitle.setText("今日情绪分布");
+            tvReportTitle.setText("情绪回声");
             btnSwitchToday.setBackgroundColor(Color.parseColor("#42A5F5")); // 选中色
             btnSwitchWeekly.setBackgroundColor(Color.GRAY); // 未选中色
 
