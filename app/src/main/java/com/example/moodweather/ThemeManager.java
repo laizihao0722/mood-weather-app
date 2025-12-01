@@ -13,6 +13,9 @@ public class ThemeManager {
     public static final String THEME_HEALING = "Healing";
     public static final String THEME_DARK = "Dark";
     public static final String THEME_ENERGY = "Energy";
+    public static final String THEME_SWEET = "Sweet";
+    public static final String THEME_WARM = "Warm";
+    public static final String THEME_BLUE = "Blue";
     public static final String THEME_DEFAULT = THEME_HEALING;
 
     // 根据主题名称获取对应的主题资源ID
@@ -22,6 +25,12 @@ public class ThemeManager {
                 return R.style.Theme_MoodWeather_Dark;
             case THEME_ENERGY:
                 return R.style.Theme_MoodWeather_Energy;
+            case THEME_SWEET:
+                return R.style.Theme_MoodWeather_Sweet;
+            case THEME_WARM:
+                return R.style.Theme_MoodWeather_Warm;
+            case THEME_BLUE:
+                return R.style.Theme_MoodWeather_Blue;
             case THEME_HEALING:
             default:
                 return R.style.Theme_MoodWeather_Healing;

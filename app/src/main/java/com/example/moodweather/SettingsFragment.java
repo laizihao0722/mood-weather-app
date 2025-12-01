@@ -47,6 +47,9 @@ public class SettingsFragment extends Fragment {
         Button btnHealing = dialogView.findViewById(R.id.btnThemeHealingDialog);
         Button btnDark = dialogView.findViewById(R.id.btnThemeDarkDialog);
         Button btnEnergy = dialogView.findViewById(R.id.btnThemeEnergyDialog);
+        Button btnSweet = dialogView.findViewById(R.id.btnThemeSweetDialog);
+        Button btnWarm = dialogView.findViewById(R.id.btnThemeWarmDialog);
+        Button btnBlue = dialogView.findViewById(R.id.btnThemeBlueDialog);
 
         // 4. 设置按钮点击事件
         btnHealing.setOnClickListener(v -> {
@@ -62,6 +65,21 @@ public class SettingsFragment extends Fragment {
         btnEnergy.setOnClickListener(v -> {
             setThemeAndRecreate(ThemeManager.THEME_ENERGY);
             dialog.dismiss(); // 关闭对话框
+        });
+
+        btnSweet.setOnClickListener(v -> {
+            setThemeAndRecreate(ThemeManager.THEME_SWEET);
+            dialog.dismiss();
+        });
+
+        btnWarm.setOnClickListener(v -> {
+            setThemeAndRecreate(ThemeManager.THEME_WARM);
+            dialog.dismiss();
+        });
+
+        btnBlue.setOnClickListener(v -> {
+            setThemeAndRecreate(ThemeManager.THEME_BLUE);
+            dialog.dismiss();
         });
 
         // 5. 显示对话框

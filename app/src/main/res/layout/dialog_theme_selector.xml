@@ -37,4 +37,26 @@
         android:text="活力系主题"
         android:backgroundTint="@color/energy_primary"/>
 
+    <Button
+        android:id="@+id/btnThemeSweetDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="甜美系主题"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/sweet_primary"/>
+
+    <Button
+        android:id="@+id/btnThemeWarmDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="温暖系主题"
+        android:backgroundTint="@color/warm_primary"/>
+
+    <Button
+        android:id="@+id/btnThemeBlueDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="忧郁系主题"
+        android:backgroundTint="@color/blue_primary"/>
+
 </LinearLayout>

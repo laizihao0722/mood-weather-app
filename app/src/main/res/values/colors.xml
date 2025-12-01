@@ -12,4 +12,13 @@
 
     <color name="energy_primary">#FF6F00</color>
     <color name="energy_background">#FFF8E1</color>
+
+    <color name="sweet_primary">#FFB6C1</color>
+    <color name="sweet_background">#FFF0F5</color>
+
+    <color name="warm_primary">#FFD700</color>
+    <color name="warm_background">#FFFBF2</color>
+
+    <color name="blue_primary">#5B98B8</color>
+    <color name="blue_background">#F5F5FF</color>
 </resources>
