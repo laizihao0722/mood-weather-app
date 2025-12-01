@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="💡 触发事件（诱因多选）"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:layout_marginBottom="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/chkWorkStress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="💼 学业/工作压力"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+        <CheckBox
+            android:id="@+id/chkFailure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📉 失败与挫折感"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkConflict"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🗣️ 人际冲突/误解"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkRelationship"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="💔 亲密关系问题"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkLoneliness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="👤 孤独感/缺乏支持"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkUncertainty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="❓ 不确定性/未来焦虑"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkSelfDoubt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🧠 自我怀疑/被比较"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkPhysicalState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="😴 身体状态不佳"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请在下方简述具体情况 (如：考试内容、吵架细节)。"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:id="@+id/edtTriggerDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="3"
+        android:gravity="top|start"
+        android:hint="输入你的具体情况..."
+        android:background="@android:drawable/editbox_background"/>
+</LinearLayout>
