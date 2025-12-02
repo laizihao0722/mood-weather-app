@@ -46,7 +46,7 @@ public class NotificationHelper {
         );
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_info) // TODO: 替换为通知图标
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("🌤️ 情绪气象提醒")
                 .setContentText("今天还没记录你的情绪哦！快来查阅你的情绪天气吧。")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -66,7 +66,7 @@ public class NotificationHelper {
         String nudgeMessage = String.format("注意到您记录了目标情绪。\n建议：%s", suggestion);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_info) // TODO: 替换为通知图标
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("情绪气象站：给你的调整建议")
                 .setContentText(nudgeMessage)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(nudgeMessage))
