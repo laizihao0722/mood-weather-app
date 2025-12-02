@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 public class Suggestion2Fragment extends Fragment {
 
     private SuggestionNavigator navigator;
+    private SuggestionViewModel viewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -23,16 +27,35 @@ public class Suggestion2Fragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(SuggestionViewModel.class);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_suggestion2, container, false);
 
-        view.findViewById(R.id.btnJoy).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnCalm).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnContent).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnPride).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnHope).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnLove).setOnClickListener(v -> navigator.navigateToSuggestion5());
-        view.findViewById(R.id.btnGratitude).setOnClickListener(v -> navigator.navigateToSuggestion5());
+        Button btnJoy = view.findViewById(R.id.btnJoy);
+        Button btnCalm = view.findViewById(R.id.btnCalm);
+        Button btnContent = view.findViewById(R.id.btnContent);
+        Button btnPride = view.findViewById(R.id.btnPride);
+        Button btnHope = view.findViewById(R.id.btnHope);
+        Button btnLove = view.findViewById(R.id.btnLove);
+        Button btnGratitude = view.findViewById(R.id.btnGratitude);
+
+        View.OnClickListener listener = v -> {
+            viewModel.suggestion234Choice = ((Button) v).getText().toString();
+            navigator.navigateToSuggestion5();
+        };
+
+        btnJoy.setOnClickListener(listener);
+        btnCalm.setOnClickListener(listener);
+        btnContent.setOnClickListener(listener);
+        btnPride.setOnClickListener(listener);
+        btnHope.setOnClickListener(listener);
+        btnLove.setOnClickListener(listener);
+        btnGratitude.setOnClickListener(listener);
 
         return view;
     }
