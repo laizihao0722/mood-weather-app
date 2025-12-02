@@ -127,4 +127,11 @@
         android:gravity="top|start"
         android:hint="输入你的具体情况..."
         android:background="@android:drawable/editbox_background"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

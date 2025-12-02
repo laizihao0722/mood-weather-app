@@ -1,8 +1,9 @@
-//数据库中的数据模型，代表一次情绪记录
 package com.example.moodweather;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
 @Entity(tableName = "mood_table")
 public class MoodEntry {
     @PrimaryKey(autoGenerate = true)
@@ -24,5 +25,6 @@ public class MoodEntry {
     }
 
     // Room 需要一个无参构造函数，即使不使用
+    @Ignore
     public MoodEntry() {}
 }

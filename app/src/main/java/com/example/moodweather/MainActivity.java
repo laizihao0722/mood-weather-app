@@ -68,9 +68,33 @@ public class MainActivity extends AppCompatActivity implements SuggestionNavigat
     }
 
     @Override
+    public void navigateToSuggestion3() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion3Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void navigateToSuggestion4() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion4Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
     public void navigateToSuggestion5() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new Suggestion5Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void navigateToResult() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new SuggestionResultFragment())
                 .addToBackStack(null)
                 .commit();
     }
