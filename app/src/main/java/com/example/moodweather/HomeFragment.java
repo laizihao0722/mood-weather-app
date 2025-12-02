@@ -130,8 +130,20 @@ public class HomeFragment extends Fragment {
 
         tvResult.setText(result);
 
-        //保存到历史记录
+        // 保存到历史记录
         recordMood(mood, weatherLabelForDB);
+        // 情绪 Nudge 检查
+        checkAndSendNudge(mood, randomSuggestion);
+    }
+
+    private void checkAndSendNudge(String currentMood, String suggestion) {
+        String avoidMood = GoalManager.getAvoidMoodGoal(getContext());
+
+        // 如果当前记录的情绪是用户希望避免的情绪
+        if (currentMood.equals(avoidMood) && !avoidMood.equals(GoalManager.NO_AVOID_MOOD)) {
+            // 通过通知提供一个调整建议
+            NotificationHelper.sendNudgeNotification(getContext(), suggestion);
+        }
     }
 
     private void recordMood(String mood, String weatherType) {

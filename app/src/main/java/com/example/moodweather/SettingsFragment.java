@@ -1,5 +1,10 @@
 package com.example.moodweather;
 
+import android.content.Context;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 public class SettingsFragment extends Fragment {
+    private Switch switchDailyReminder;
+    private Spinner spinnerAvoidMood;
+    private boolean isSpinnerInitialLoad = true;
 
     public SettingsFragment() {
         // 空构造函数
@@ -26,6 +34,53 @@ public class SettingsFragment extends Fragment {
         Button btnShowThemeDialog = view.findViewById(R.id.btnShowThemeDialog);
         // 设置点击事件：弹出主题选择对话框
         btnShowThemeDialog.setOnClickListener(v -> showThemeSelectionDialog());
+
+        isSpinnerInitialLoad = true;
+        switchDailyReminder = view.findViewById(R.id.switchDailyReminder);
+        spinnerAvoidMood = view.findViewById(R.id.spinnerAvoidMood);
+
+        // 手动设置 Spinner 适配器
+        if (getContext() != null) {
+            // 使用 R.array.avoid_mood_options 资源创建适配器
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    getContext(),
+                    R.array.avoid_mood_options,
+                    android.R.layout.simple_spinner_item // 简单样式
+            );
+            // 设置下拉列表样式
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerAvoidMood.setAdapter(adapter); // 设置适配器
+        }
+
+        // 加载当前设置
+        loadGoalSettings(getContext());
+        // 设置每日提醒开关监听器
+        switchDailyReminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            GoalManager.saveDailyRecordGoal(getContext(), isChecked);
+            setDailyReminderAlarm(getContext(), isChecked); // 开启/关闭定时闹钟
+            Toast.makeText(getContext(), isChecked ? "每日提醒已开启" : "每日提醒已关闭", Toast.LENGTH_SHORT).show();
+        });
+
+        // 设置避免情绪 Spinner 监听器
+        spinnerAvoidMood.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isSpinnerInitialLoad) {
+                    isSpinnerInitialLoad = false;
+                    return; // 退出，不执行后续逻辑
+                }
+                // 从 Spinner 选项中提取情绪标签 (例如：从 "愤怒 (Angry)" 提取 "愤怒")
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                String selectedMood = selectedItem.split(" ")[0];
+
+                GoalManager.saveAvoidMoodGoal(getContext(), selectedMood);
+                if (!selectedMood.equals(GoalManager.NO_AVOID_MOOD)) {
+                    Toast.makeText(getContext(), "目标：减少记录 [" + selectedMood + "]", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         return view;
     }
@@ -95,6 +150,33 @@ public class SettingsFragment extends Fragment {
         if (getActivity() != null) {
             Toast.makeText(getContext(), "主题已切换为 " + themeName + "，正在刷新...", Toast.LENGTH_SHORT).show();
             getActivity().recreate();
+        }
+    }
+
+    private void loadGoalSettings(Context context) {
+        if (context == null) return;
+
+        // 1. 加载每日记录提醒设置
+        switchDailyReminder.setChecked(GoalManager.isDailyRecordGoalSet(context));
+
+        // 2. 加载避免情绪目标
+        String avoidMood = GoalManager.getAvoidMoodGoal(context);
+        ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spinnerAvoidMood.getAdapter();
+        if (adapter != null) {
+            for (int i = 0; i < adapter.getCount(); i++) {
+                String itemText = adapter.getItem(i).toString().split(" ")[0];
+                if (itemText.equals(avoidMood)) {
+                    spinnerAvoidMood.setSelection(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    //代理到 MainActivity 设置闹钟的方法
+    private void setDailyReminderAlarm(Context context, boolean enable) {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).scheduleDailyReminder(enable);
         }
     }
 }

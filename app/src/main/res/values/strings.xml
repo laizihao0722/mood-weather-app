@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Mood Weather</string>
+    <string-array name="avoid_mood_options">
+        <item>无目标 (None)</item>
+        <item>愤怒 (Angry)</item>
+        <item>崩溃 (Crushed)</item>
+        <item>难过 (Sad)</item>
+    </string-array>
 </resources>
