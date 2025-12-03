@@ -5,13 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:gravity="center">  <TextView
+    android:gravity="center"
+    android:background="?attr/backgroundColor">
+
+    <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="🌦️ 心理微气候"
     android:textSize="24sp"
     android:textStyle="bold"
-    android:layout_marginBottom="30dp" />
+    android:layout_marginBottom="30dp"/>
 
     <GridLayout
         android:id="@+id/emotionGrid"

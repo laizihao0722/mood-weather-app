@@ -125,6 +125,7 @@ public class HistoryFragment extends Fragment {
 
     // 切换报告周期
     private void switchReportPeriod(ReportPeriod period) {
+        int textColor = getChartTextColor();
         if (currentPeriod == period) return; // 避免重复切换
 
         currentPeriod = period;
@@ -132,6 +133,7 @@ public class HistoryFragment extends Fragment {
         // 更新 UI 标题和按钮颜色
         if (period == ReportPeriod.TODAY) {
             tvReportTitle.setText("情绪回声");
+            tvReportTitle.setTextColor(textColor);
             btnSwitchToday.setBackgroundColor(Color.parseColor("#42A5F5")); // 选中色
             btnSwitchWeekly.setBackgroundColor(Color.GRAY); // 未选中色
 
@@ -146,6 +148,7 @@ public class HistoryFragment extends Fragment {
 
         } else if (period == ReportPeriod.WEEKLY) {
             tvReportTitle.setText("历史周报情绪分布 (过去 7 天)");
+            tvReportTitle.setTextColor(textColor);
             btnSwitchToday.setBackgroundColor(Color.GRAY); // 未选中色
             btnSwitchWeekly.setBackgroundColor(Color.parseColor("#42A5F5")); // 选中色
 
@@ -160,8 +163,24 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-    // --- 饼图 (情绪分布) 逻辑 ---
+    private int getChartTextColor() {
+        if (getContext() == null) return Color.BLACK; // 默认返回黑色
+
+        // 假设 ThemeManager.loadTheme 和 ThemeManager.THEME_DARK 已在项目中定义
+        String currentTheme = ThemeManager.loadTheme(getContext());
+
+        // 假设 "Dark" (暗黑系) 的主题常量为 ThemeManager.THEME_DARK
+        if (ThemeManager.THEME_DARK.equals(currentTheme)) {
+            return Color.WHITE;
+        } else {
+            return Color.BLACK;
+        }
+    }
+
+    // 饼图 (情绪分布) 逻辑
     private void setupPieChart(List<MoodStats> moodStatsList) {
+        int textColor = getChartTextColor();
+
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
 
@@ -178,7 +197,7 @@ public class HistoryFragment extends Fragment {
             }
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "情绪分布");
+        PieDataSet dataSet = new PieDataSet(entries, "情绪回声");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(Color.WHITE);
         dataSet.setValueTextSize(14f);
@@ -190,12 +209,16 @@ public class HistoryFragment extends Fragment {
         pieChart.getDescription().setEnabled(false);
         pieChart.setCenterText("你的心情");
         pieChart.setCenterTextSize(16f);
+        pieChart.getLegend().setTextColor(textColor);
         pieChart.animateY(1000);
         pieChart.invalidate();
     }
 
-    // --- 柱状图 (天气统计) 逻辑 ---
+
+    // 柱状图 (天气统计) 逻辑
     private void setupBarChart(List<MoodStats> weatherStatsList) {
+        int textColor = getChartTextColor();
+
         ArrayList<BarEntry> entries = new ArrayList<>();
         String[] weatherLabels = new String[weatherStatsList.size()];
         // 柱状图的颜色列表
@@ -216,7 +239,7 @@ public class HistoryFragment extends Fragment {
 
         BarDataSet dataSet = new BarDataSet(entries, "出现次数");
         dataSet.setColors(colors);
-        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextColor(textColor);
 
         BarData data = new BarData(dataSet);
         barChart.setData(data);
@@ -227,10 +250,13 @@ public class HistoryFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
         xAxis.setDrawGridLines(false); // 隐藏网格线
+        xAxis.setTextColor(textColor);
 
         // 配置和刷新图表
         barChart.getDescription().setEnabled(false);
         barChart.getAxisRight().setEnabled(false);
+        barChart.getAxisLeft().setTextColor(textColor);
+        barChart.getLegend().setTextColor(textColor);
         barChart.animateY(1000);
         barChart.invalidate();
     }
