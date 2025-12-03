@@ -29,6 +29,10 @@
         <item name="colorPrimary">@color/dark_primary</item>
         <item name="colorSecondary">@color/white</item>
         <item name="android:statusBarColor">@color/dark_primary</item>
+
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+
     </style>
 
     <style name="Theme.MoodWeather.Energy" parent="Theme.AppCompat.Light.NoActionBar">

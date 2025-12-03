@@ -43,7 +43,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.5.3") // 导航组件
     implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0") //图表组件
-
+    // CardView 库
+    implementation("androidx.cardview:cardview:1.0.0")
     // Room 数据库
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")

@@ -9,6 +9,7 @@
     <color name="dark_primary">#333333</color>
     <color name="dark_background">#121212</color>
     <color name="dark_dialog_background">#2C2C2C</color>
+    <color name="text_secondary_dark">#CCCCCC</color>
 
     <color name="energy_primary">#FF6F00</color>
     <color name="energy_background">#FFF8E1</color>
