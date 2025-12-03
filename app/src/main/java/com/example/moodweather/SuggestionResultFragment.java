@@ -1,7 +1,7 @@
 package com.example.moodweather;
 
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import java.util.List;
 
 public class SuggestionResultFragment extends Fragment {
 
@@ -27,13 +28,15 @@ public class SuggestionResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_suggestion_result, container, false);
         TextView tvResult = view.findViewById(R.id.tvResult);
 
-        StringBuilder resultBuilder = new StringBuilder();
-        resultBuilder.append("你的选择是: ").append(viewModel.suggestion1Choice).append("\n");
-        resultBuilder.append("具体情绪: ").append(viewModel.suggestion234Choice).append("\n");
-        resultBuilder.append("诱因: ").append(TextUtils.join(", ", viewModel.suggestion5Choices)).append("\n");
-        resultBuilder.append("具体情况: ").append(viewModel.suggestion5Details).append("\n");
+        // 从 ViewModel 中获取用户选择
+        String emotion = viewModel.suggestion234Choice;
+        List<String> causes = viewModel.suggestion5Choices;
 
-        tvResult.setText(resultBuilder.toString());
+        // 调用 AnalysisReportProvider 获取报告
+        String reportHtml = AnalysisReportProvider.getReport(emotion, causes);
+
+        // 使用 Html.fromHtml() 来渲染 HTML 格式的报告
+        tvResult.setText(Html.fromHtml(reportHtml, Html.FROM_HTML_MODE_LEGACY));
 
         return view;
     }
