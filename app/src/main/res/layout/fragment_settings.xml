@@ -97,8 +97,8 @@
                         android:id="@+id/switchDailyReminder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:thumbTint="?attr/primaryColor"
-                        android:trackTint="?attr/primaryColor"/>
+                        android:thumbTint="?attr/backgroundColor"
+                        android:trackTint="?attr/textColorPrimary"/>
                 </LinearLayout>
 
                 <View
