@@ -142,6 +142,22 @@ public class MainActivity extends AppCompatActivity implements SuggestionNavigat
     }
 
     @Override
+    public void navigateToSuggestion6() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion6Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void navigateToSuggestion7() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Suggestion7Fragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
     public void navigateToResult() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new SuggestionResultFragment())

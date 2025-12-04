@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="💡 积极体验来源（可多选）"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:layout_marginBottom="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/chkWorkStress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🎯 任务完成/心流体验"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+        <CheckBox
+            android:id="@+id/chkFailure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📈 达成与进步/解决问题"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkConflict"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🤝 深度连接/有效沟通"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkRelationship"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="💕 情感支持/共同成长"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkLoneliness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="☀️ 独处与沉思/自主空间"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkUncertainty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="✅ 目标清晰/掌控感"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkSelfDoubt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🌟 自我接纳/内在参照"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkPhysicalState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🔋 精力充沛/生理舒适"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

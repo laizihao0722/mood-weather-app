@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center"
+    android:background="?attr/backgroundColor">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/neutral_triggers_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <CheckBox
+            android:id="@+id/chkSustainedBalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sustained_balance"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+        <CheckBox
+            android:id="@+id/chkRepetitiveActions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/repetitive_actions"
+            android:layout_margin="8dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkDiminishingReturns"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/diminishing_returns"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkPoliteInteraction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/polite_interaction"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkStableProtection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/stable_protection"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkUnproductiveSolitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/unproductive_solitude"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/chkRigidSelfAwareness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/rigid_self_awareness"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+            <CheckBox
+                android:id="@+id/chkInertialComfort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/inertial_comfort"
+                android:layout_margin="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

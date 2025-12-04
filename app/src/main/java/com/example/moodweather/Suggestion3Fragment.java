@@ -45,7 +45,7 @@ public class Suggestion3Fragment extends Fragment {
 
         View.OnClickListener listener = v -> {
             viewModel.suggestion234Choice = ((Button) v).getText().toString();
-            navigator.navigateToSuggestion5();
+            navigator.navigateToSuggestion7();
         };
 
         btnNeutral.setOnClickListener(listener);

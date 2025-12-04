@@ -6,4 +6,18 @@
         <item>崩溃 (Crushed)</item>
         <item>难过 (Sad)</item>
     </string-array>
+    <string name="what_might_be_the_triggers">是什么原因让你有这种感觉呢？</string>
+    <string name="sustained_balance">⚖️ 持续平衡/例行公事</string>
+    <string name="repetitive_actions">🔄 重复操作/心流微弱</string>
+    <string name="diminishing_returns">📉 边际效益递减/反馈微弱</string>
+    <string name="polite_interaction">📞 礼貌性互动</string>
+    <string name="stable_protection">🛡️ 稳定保护/缺乏变化</string>
+    <string name="unproductive_solitude">⏳ 独处无果/认知停滞</string>
+    <string name="rigid_self_awareness">🧱 自我意识僵化</string>
+    <string name="inertial_comfort">🛌 惰性舒适/低生理唤醒</string>
+    <string name="other_triggers_optional">其他触发因素（可选）</string>
+    <string name="submit">提交</string>
+    <string name="neutral_triggers_title">😐 中性情绪诱因（可多选）</string>
+
+    <!-- <string name="app_name">mood-weather</string> -->
 </resources>

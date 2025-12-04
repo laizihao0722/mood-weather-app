@@ -114,23 +114,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="请在下方简述具体情况 (如：考试内容、吵架细节)。"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:layout_marginTop="30dp" />
-
-    <EditText
-        android:id="@+id/edtTriggerDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minLines="3"
-        android:gravity="top|start"
-        android:hint="输入你的具体情况..."
-        android:background="@android:drawable/editbox_background"/>
-
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
