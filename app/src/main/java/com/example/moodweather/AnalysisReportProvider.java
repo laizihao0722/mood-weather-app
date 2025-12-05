@@ -4912,7 +4912,7 @@ public class AnalysisReportProvider {
         defaultReport.append("<h3>💡 情绪组合分析报告</h3>");
         defaultReport.append("<p><b>具体情绪:</b> ").append(emotion).append("</p>");
         defaultReport.append("<p><b>诱因:</b> ").append(String.join(", ", causes)).append("</p>");
-        defaultReport.append("<p>详细分析报告正在生成中...</p>");
+        defaultReport.append("<p>请完善上述信息，以便为您提供更细致的心理分析</p>");
 
         return defaultReport.toString();
     }
