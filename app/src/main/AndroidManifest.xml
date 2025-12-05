@@ -22,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MoodCalendarActivity"
+            android:label="情绪气象日历"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".AlarmReceiver"

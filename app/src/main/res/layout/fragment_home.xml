@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🌤️ 情绪气象站"
+        android:text="📒情绪日记本"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="30dp" />
@@ -71,6 +71,18 @@
             android:layout_margin="8dp"
             android:textSize="16sp" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/etMoodEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:gravity="top|start"
+        android:hint="此刻，你想记录下今天怎样的自己......"
+        android:inputType="textMultiLine"
+        android:layout_marginBottom="20dp"
+        android:textSize="16sp"
+        android:textColor="?attr/textColorPrimary" />
 
     <!-- 结果显示区域 -->
     <TextView

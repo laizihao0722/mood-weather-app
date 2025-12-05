@@ -1,5 +1,6 @@
 package com.example.moodweather;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class HistoryFragment extends Fragment {
     //新增 UI 控件和状态变量
     private Button btnSwitchToday;
     private Button btnSwitchWeekly;
+    private Button btnOpenCalendar;
     private TextView tvReportTitle;
 
     private enum ReportPeriod { TODAY, WEEKLY }
@@ -77,6 +79,7 @@ public class HistoryFragment extends Fragment {
         // 初始化新增的 UI 控件
         btnSwitchToday = view.findViewById(R.id.btnSwitchToday);
         btnSwitchWeekly = view.findViewById(R.id.btnSwitchWeekly);
+        btnOpenCalendar = view.findViewById(R.id.btnOpenCalendar);
         tvReportTitle = view.findViewById(R.id.tvReportTitle);
 
         historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
@@ -84,6 +87,10 @@ public class HistoryFragment extends Fragment {
         // 设置切换按钮的监听器
         btnSwitchToday.setOnClickListener(v -> switchReportPeriod(ReportPeriod.TODAY));
         btnSwitchWeekly.setOnClickListener(v -> switchReportPeriod(ReportPeriod.WEEKLY));
+        btnOpenCalendar.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MoodCalendarActivity.class);
+            startActivity(intent);
+        });
 
         // 统一设置 LiveData 观察者
         setupObservers();

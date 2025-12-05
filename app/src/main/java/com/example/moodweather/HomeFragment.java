@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import java.util.Random;
 public class HomeFragment extends Fragment {
     private HistoryViewModel historyViewModel;
     private TextView tvResult;
+    private EditText etMoodEntry;//日记输入框
     private final Random random = new Random();
 
     // 情绪 -> 随机天气描述
@@ -76,6 +78,7 @@ public class HomeFragment extends Fragment {
 
     private void initUI(View view) {
         tvResult = view.findViewById(R.id.tvResult);
+        etMoodEntry = view.findViewById(R.id.etMoodEntry);
 
         // 🎯 情绪按钮点击事件
         Button btnHappy = view.findViewById(R.id.btnHappy);
@@ -100,6 +103,13 @@ public class HomeFragment extends Fragment {
         String randomWeather = weathers.get(random.nextInt(weathers.size()));
         String randomEmoji = emojis.get(random.nextInt(emojis.size()));
         String randomSuggestion = suggestions.get(random.nextInt(suggestions.size()));
+
+        //日记内容
+        String diaryContent = etMoodEntry.getText().toString().trim();
+        // 用户无输入默认空字符串
+        if (diaryContent.isEmpty()) {
+            diaryContent = "";
+        }
 
         String weatherLabelForDB;
         switch (mood) {
@@ -156,7 +166,10 @@ public class HomeFragment extends Fragment {
         // 3. 调用 ViewModel 的 insert 方法将数据异步插入数据库
         historyViewModel.insert(newEntry);
 
-        // 4. 用户反馈
+        // 4.清空输入框以便下次记录
+        etMoodEntry.setText("");
+
+        // 5. 用户反馈
         Toast.makeText(getContext(), "心情记录成功: " + mood + " / " + weatherType, Toast.LENGTH_SHORT).show();
     }
 }
