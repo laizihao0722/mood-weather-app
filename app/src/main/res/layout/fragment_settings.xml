@@ -141,16 +141,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="数据与其他"
+                    android:text="帮助与支持"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="?attr/textColorPrimary"
                     android:layout_marginBottom="12dp"/>
 
                 <Button
+                    android:id="@+id/btnUsageGuide"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="导出历史数据"
+                    android:text="使用说明"
                     android:background="@android:color/transparent"
                     android:gravity="start|center_vertical"
                     android:paddingStart="0dp"
@@ -163,14 +164,32 @@
                     android:background="#E0E0E0"/>
 
                 <Button
+                    android:id="@+id/btnPrivacyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="关于情绪气象站"
+                    android:text="隐私政策与服务条款"
                     android:background="@android:color/transparent"
                     android:gravity="start|center_vertical"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
                     android:textColor="?attr/textColorPrimary"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"/>
+
+                <Button
+                    android:id="@+id/btnFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="意见反馈/联系我们"
+                    android:background="@android:color/transparent"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="?attr/textColorPrimary"/>
+
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

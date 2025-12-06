@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="意见反馈"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?attr/textColorPrimary"
+        android:layout_marginBottom="24dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_back_to_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_revert"
+        android:background="?attr/backgroundColor"
+        android:contentDescription="返回设置"
+        android:textColor="?attr/textColorPrimary"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/et_feedback_input"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="top"
+        android:padding="12dp"
+        android:hint="请输入您的建议或遇到的问题..."
+        android:textColor="?attr/textColorPrimary"
+        android:textColorHint="#999999"
+        android:background="@drawable/edittext_background"
+        android:inputType="textMultiLine"/>
+
+    <Button
+        android:id="@+id/btn_submit_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交反馈"
+        android:backgroundTint="?attr/primaryColor"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
