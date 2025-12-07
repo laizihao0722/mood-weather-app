@@ -38,6 +38,9 @@ public class SettingsFragment extends Fragment {
         isSpinnerInitialLoad = true;
         switchDailyReminder = view.findViewById(R.id.switchDailyReminder);
         spinnerAvoidMood = view.findViewById(R.id.spinnerAvoidMood);
+        Button btnUsageGuide = view.findViewById(R.id.btnUsageGuide);
+        Button btnPrivacyPolicy = view.findViewById(R.id.btnPrivacyPolicy);
+        Button btnFeedback = view.findViewById(R.id.btnFeedback);
 
         // 手动设置 Spinner 适配器
         if (getContext() != null) {
@@ -80,6 +83,36 @@ public class SettingsFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        // 使用说明
+        btnUsageGuide.setOnClickListener(v -> {
+            if (getActivity() != null) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new HelpFragment())
+                        .addToBackStack(null) // 加入返回栈，以便用户按返回键
+                        .commit();
+            }
+        });
+
+        // 隐私政策与服务条款
+        btnPrivacyPolicy.setOnClickListener(v -> {
+            if (getActivity() != null) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new PrivacyPolicyFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        // 意见反馈/联系我们
+        btnFeedback.setOnClickListener(v -> {
+            if (getActivity() != null) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new FeedbackFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
         });
 
         return view;
