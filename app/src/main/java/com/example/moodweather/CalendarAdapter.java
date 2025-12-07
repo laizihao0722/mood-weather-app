@@ -63,17 +63,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.DayVie
     private int getWeatherResource(String emotion) {
         switch (emotion) {
             case "开心":
-                // 映射：晴空万里 / 温暖阳光
                 return R.drawable.ic_weather_sunny;
 
             case "愤怒":
                 // 映射：狂风暴雨 / 闪电雷鸣 -> Stormy
-                return R.drawable.ic_weather_thunder;
+                return random.nextBoolean()? R.drawable.ic_weather_thunder : R.drawable.ic_weather_valcano;
 
             case "难过":
-                return R.drawable.ic_weather_rain;
-            case "崩溃":
                 return random.nextBoolean() ? R.drawable.ic_weather_rain : R.drawable.ic_weather_fog;
+            case "崩溃":
+                return R.drawable.ic_weather_turnado;
 
             case "困倦":
                 // 映射：慵懒多云 -> Cloudy
