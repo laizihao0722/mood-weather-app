@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 @Database(entities = {MoodEntry.class}, version = 1, exportSchema = false)
 public abstract class MoodDatabase extends RoomDatabase {
 

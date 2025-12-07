@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="?attr/customCardBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvMoodWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开心 (Sunny)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?attr/textColorPrimary"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025年12月07日 12：00"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="8dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="今天我完成了一个大项目，感觉非常棒！"
+            android:textSize="16sp"
+            android:textColor="?attr/textColorPrimary"
+            android:lineSpacingMultiplier="1.2"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

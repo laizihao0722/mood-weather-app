@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 public class SettingsFragment extends Fragment {
     private Switch switchDailyReminder;
     private Spinner spinnerAvoidMood;
+    private Button btnViewDiaryEntries;
     private boolean isSpinnerInitialLoad = true;
 
     public SettingsFragment() {
@@ -38,6 +39,7 @@ public class SettingsFragment extends Fragment {
         isSpinnerInitialLoad = true;
         switchDailyReminder = view.findViewById(R.id.switchDailyReminder);
         spinnerAvoidMood = view.findViewById(R.id.spinnerAvoidMood);
+        btnViewDiaryEntries = view.findViewById(R.id.btnViewDiaryEntries);
         Button btnUsageGuide = view.findViewById(R.id.btnUsageGuide);
         Button btnPrivacyPolicy = view.findViewById(R.id.btnPrivacyPolicy);
         Button btnFeedback = view.findViewById(R.id.btnFeedback);
@@ -83,6 +85,17 @@ public class SettingsFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        //查看日记按钮监听器
+        btnViewDiaryEntries.setOnClickListener(v -> {
+            if (getActivity() != null) {
+                // DiaryListFragment 是用来显示日记列表的新 Fragment
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new DiaryListFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
         });
 
         // 使用说明

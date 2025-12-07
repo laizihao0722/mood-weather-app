@@ -15,7 +15,7 @@ public interface MoodDao {
     @Insert
     void insert(MoodEntry mood);
 
-    // 新增：查询某一日期范围内最新的情绪记录（用作日历上的主要情绪）
+    // 查询某一日期范围内最新的情绪记录（用作日历上的主要情绪）
     // :startTime 和 :endTime 应该表示某一天的开始和结束时间戳
     @Query("SELECT emotionLabel FROM mood_table " +
             "WHERE timestamp BETWEEN :startTime AND :endTime " +
@@ -38,4 +38,8 @@ public interface MoodDao {
     // 统计各情绪天气的出现次数 (用于柱状图)(月报/周报通用接口)
     @Query("SELECT weatherType as type, COUNT(weatherType) as count FROM mood_table WHERE timestamp BETWEEN :startTime AND :endTime GROUP BY weatherType")
     LiveData<List<MoodStats>> getWeatherStatsBetween(long startTime, long endTime);
+
+    //获取所有日记条目，用于列表显示
+    @Query("SELECT * FROM mood_table ORDER BY timestamp DESC")
+    LiveData<List<MoodEntry>> getAllEntries();
 }

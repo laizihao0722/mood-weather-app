@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/backgroundColor">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📜 日记历史"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?attr/textColorPrimary"
+        android:layout_marginBottom="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDiaryEntries"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:visibility="gone" /> <TextView
+    android:id="@+id/tvEmptyState"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:text="暂无日记记录。去 Home 页面写下第一篇日记吧！"
+    android:textColor="?android:attr/textColorSecondary"
+    android:textSize="18sp"
+    android:visibility="visible"/> </LinearLayout>

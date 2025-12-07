@@ -11,6 +11,7 @@ import java.util.TimeZone;
 public class HistoryViewModel extends AndroidViewModel {
 
     private final MoodDao moodDao;
+    private final LiveData<List<MoodEntry>> mAllEntries;
     public final LiveData<List<MoodStats>> todayEmotionStats;
     public final LiveData<List<MoodStats>> todayWeatherStats;
     public final LiveData<List<MoodStats>> weeklyEmotionStats;
@@ -21,6 +22,7 @@ public class HistoryViewModel extends AndroidViewModel {
         MoodDatabase db = MoodDatabase.getDatabase(application);
         moodDao = db.moodDao();
 
+        mAllEntries = moodDao.getAllEntries();
         // 计算今天零点的时间戳 (毫秒)
         long startOfToday = getStartOfTodayTimestamp();
 
@@ -35,7 +37,10 @@ public class HistoryViewModel extends AndroidViewModel {
         weeklyWeatherStats = moodDao.getWeatherStatsBetween(startOfLastWeek, endOfLastWeek);
     }
 
-
+    //获取数据库中所有的日记条目，按时间倒序排列。
+    public LiveData<List<MoodEntry>> getAllEntries() {
+        return mAllEntries;
+    }
 
     // 示例：插入数据的方法 (用于测试或首页记录)
     public void insert(MoodEntry mood) {

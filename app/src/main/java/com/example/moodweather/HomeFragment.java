@@ -9,20 +9,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View;
 import androidx.fragment.app.Fragment;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
     private HistoryViewModel historyViewModel;
     private TextView tvResult;
-    private EditText etMoodEntry;//日记输入框
+    private EditText etMoodEntry; // 日记输入框
+    private Button btnSubmit;
+
+    // 新增：用于暂存待提交的数据
+    private String selectedMood = null;
+    private String selectedWeatherLabel = null;
+
     private final Random random = new Random();
 
     // 情绪 -> 随机天气描述
@@ -79,22 +83,42 @@ public class HomeFragment extends Fragment {
     private void initUI(View view) {
         tvResult = view.findViewById(R.id.tvResult);
         etMoodEntry = view.findViewById(R.id.etMoodEntry);
+        btnSubmit = view.findViewById(R.id.btnSubmit);
 
-        // 🎯 情绪按钮点击事件
+        // 情绪按钮点击事件
         Button btnHappy = view.findViewById(R.id.btnHappy);
         Button btnSad = view.findViewById(R.id.btnSad);
         Button btnAngry = view.findViewById(R.id.btnAngry);
         Button btnTired = view.findViewById(R.id.btnTired);
         Button btnStress = view.findViewById(R.id.btnStress);
 
-        btnHappy.setOnClickListener(v -> showMoodResult("开心"));
-        btnSad.setOnClickListener(v -> showMoodResult("难过"));
-        btnAngry.setOnClickListener(v -> showMoodResult("愤怒"));
-        btnTired.setOnClickListener(v -> showMoodResult("困倦"));
-        btnStress.setOnClickListener(v -> showMoodResult("崩溃"));
+        btnHappy.setOnClickListener(v -> generateMoodResult("开心"));
+        btnSad.setOnClickListener(v -> generateMoodResult("难过"));
+        btnAngry.setOnClickListener(v -> generateMoodResult("愤怒"));
+        btnTired.setOnClickListener(v -> generateMoodResult("困倦"));
+        btnStress.setOnClickListener(v -> generateMoodResult("崩溃"));
+
+        // 提交按钮点击事件：点击时才记录
+        btnSubmit.setOnClickListener(v -> {
+            if (selectedMood != null && selectedWeatherLabel != null) {
+                // 1. 获取日记内容
+                String diaryContent = etMoodEntry.getText().toString().trim();
+
+                // 2. 执行记录操作
+                recordMood(selectedMood, selectedWeatherLabel, diaryContent);
+
+                // 3. 重置状态
+                selectedMood = null;
+                selectedWeatherLabel = null;
+                tvResult.setText("记录成功！请选择你的下一个情绪或退出。");
+            } else {
+                Toast.makeText(getContext(), "请先选择你的情绪！", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void showMoodResult(String mood) {
+
+    private void generateMoodResult(String mood) {
         List<String> weathers = moodToWeather.get(mood);
         List<String> emojis = moodToEmoji.get(mood);
         List<String> suggestions = moodToSuggestions.get(mood);
@@ -103,13 +127,6 @@ public class HomeFragment extends Fragment {
         String randomWeather = weathers.get(random.nextInt(weathers.size()));
         String randomEmoji = emojis.get(random.nextInt(emojis.size()));
         String randomSuggestion = suggestions.get(random.nextInt(suggestions.size()));
-
-        //日记内容
-        String diaryContent = etMoodEntry.getText().toString().trim();
-        // 用户无输入默认空字符串
-        if (diaryContent.isEmpty()) {
-            diaryContent = "";
-        }
 
         String weatherLabelForDB;
         switch (mood) {
@@ -133,15 +150,17 @@ public class HomeFragment extends Fragment {
                 break;
         }
 
-        // 组合结果
+        // 1. 存储情绪和天气标签，等待提交
+        selectedMood = mood;
+        selectedWeatherLabel = weatherLabelForDB;
+
+        // 组合结果，提示用户点击提交按钮
         String result = randomEmoji + " " + randomWeather + "！\n\n" +
-                "今日幸运建议：" + randomSuggestion + "\n\n" +
-                "🌤️ 你的情绪天气已生成！";
+                "参考建议：" + randomSuggestion + "\n\n" +
+                "请在上方输入日记内容，然后点击「确认并记录」按钮完成日记。";
 
         tvResult.setText(result);
 
-        // 保存到历史记录
-        recordMood(mood, weatherLabelForDB);
         // 情绪 Nudge 检查
         checkAndSendNudge(mood, randomSuggestion);
     }
@@ -156,17 +175,17 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void recordMood(String mood, String weatherType) {
+    private void recordMood(String mood, String weatherType, String diaryContent) {
         // 1. 获取当前时间戳
         long timestamp = System.currentTimeMillis();
 
         // 2. 创建 MoodEntry 对象
-        MoodEntry newEntry = new MoodEntry(timestamp, mood, weatherType);
+        MoodEntry newEntry = new MoodEntry(timestamp, mood, weatherType, diaryContent);
 
         // 3. 调用 ViewModel 的 insert 方法将数据异步插入数据库
         historyViewModel.insert(newEntry);
 
-        // 4.清空输入框以便下次记录
+        // 4. 清空输入框以便下次记录
         etMoodEntry.setText("");
 
         // 5. 用户反馈

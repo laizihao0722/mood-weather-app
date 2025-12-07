@@ -1,99 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center"
+    android:fillViewport="true"
     android:background="?attr/backgroundColor">
 
-    <!-- 标题 -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="📒情绪日记本"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="30dp" />
-
-    <!-- 垂直排列的5个按钮 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="30dp"
+        android:padding="20dp"
         android:gravity="center">
 
-        <!-- 每个按钮固定宽度，水平居中 -->
-        <Button
-            android:id="@+id/btnHappy"
-            android:layout_width="150dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="😊 开心"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
+            android:text="📒情绪日记本"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnHappy"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="😊 开心"
+                android:layout_margin="8dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnSad"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="😢 难过"
+                android:layout_margin="8dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnAngry"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="😡 愤怒"
+                android:layout_margin="8dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnTired"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="🥱 困倦"
+                android:layout_margin="8dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnStress"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="🤯 崩溃"
+                android:layout_margin="8dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etMoodEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"
+            android:gravity="top|start"
+            android:hint="此刻，你想记录下今天怎样的自己......"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:textColor="?attr/textColorPrimary" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择你的情绪，看看今天的天气吧！"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:background="?attr/customCardBackground"
+            android:textColor="?attr/textColorPrimary"
+            android:minHeight="100dp"
+            android:layout_marginBottom="20dp"/>
+
+
 
         <Button
-            android:id="@+id/btnSad"
-            android:layout_width="150dp"
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="😢 难过"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
+            android:text="确认并记录"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/btnAngry"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="😡 愤怒"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btnTired"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="🥱 困倦"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btnStress"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="🤯 崩溃"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/etMoodEntry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:gravity="top|start"
-        android:hint="此刻，你想记录下今天怎样的自己......"
-        android:inputType="textMultiLine"
-        android:layout_marginBottom="20dp"
-        android:textSize="16sp"
-        android:textColor="?attr/textColorPrimary" />
-
-    <!-- 结果显示区域 -->
-    <TextView
-        android:id="@+id/tvResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="选择你的情绪，看看今天的天气吧！"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:padding="15dp"
-        android:background="?attr/customCardBackground"
-        android:textColor="?attr/textColorPrimary"
-        android:minHeight="100dp" />
-</LinearLayout>
+</ScrollView>

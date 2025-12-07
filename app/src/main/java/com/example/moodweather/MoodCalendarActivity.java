@@ -21,7 +21,7 @@ public class MoodCalendarActivity extends AppCompatActivity {
     private CalendarAdapter adapter;
     private Calendar currentCalendar;
 
-    // 【新增】MoodDao 和 线程执行器
+    // MoodDao 和 线程执行器
     private MoodDao moodDao;
     private ExecutorService executorService;
 
@@ -33,7 +33,7 @@ public class MoodCalendarActivity extends AppCompatActivity {
         tvMonthTitle = findViewById(R.id.tvMonthTitle);
         recyclerViewCalendar = findViewById(R.id.recyclerViewCalendar);
 
-        // 【新增】初始化数据库访问和线程池
+        // 初始化数据库访问和线程池
         MoodDatabase db = MoodDatabase.getDatabase(this);
         moodDao = db.moodDao();
         executorService = MoodDatabase.databaseWriteExecutor;
@@ -63,7 +63,7 @@ public class MoodCalendarActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年 MM月", Locale.getDefault());
         tvMonthTitle.setText(sdf.format(currentCalendar.getTime()));
 
-        // 【关键】将日历生成逻辑放入后台线程
+        // 将日历生成逻辑放入后台线程
         executorService.execute(() -> {
             List<CalendarDay> days = generateDaysForMonth(currentCalendar);
 
@@ -121,7 +121,7 @@ public class MoodCalendarActivity extends AppCompatActivity {
         endCal.set(Calendar.MILLISECOND, 999);
         long endTime = endCal.getTimeInMillis();
 
-        // 2. 调用 MoodDao 获取最新情绪
+        // 调用 MoodDao 获取最新情绪
         return moodDao.getLatestEmotionForDay(startTime, endTime);
     }
 

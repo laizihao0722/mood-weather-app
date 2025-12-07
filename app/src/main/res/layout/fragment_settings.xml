@@ -141,6 +141,40 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="日记管理"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/textColorPrimary"
+                    android:layout_marginBottom="12dp"/>
+
+                <Button
+                    android:id="@+id/btnViewDiaryEntries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="查看日记内容"
+                    android:backgroundTint="?attr/backgroundColor"
+                    android:textColor="?attr/textColorPrimary"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="?attr/customCardBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="帮助与支持"
                     android:textSize="18sp"
                     android:textStyle="bold"
