@@ -18,7 +18,7 @@ public class MoodEntry {
     // 情绪天气
     public String weatherType;
 
-    // 新增：日记内容字段 (用于存储用户输入的文字)
+    // 日记内容字段 (用于存储用户输入的文字)
     public String content;
 
     // 修改后：新增 content 参数

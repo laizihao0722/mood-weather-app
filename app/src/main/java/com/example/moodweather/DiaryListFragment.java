@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ public class DiaryListFragment extends Fragment {
     private RecyclerView recyclerView;
     private DiaryEntryAdapter adapter;
     private TextView tvEmptyState;
+    private ImageButton btnBack;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +35,19 @@ public class DiaryListFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerViewDiaryEntries);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
+        btnBack = view.findViewById(R.id.btnBack);
 
         // 初始化 RecyclerView
         adapter = new DiaryEntryAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+
+        //返回监听
+        btnBack.setOnClickListener(v -> {
+            if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
 
         // 观察数据库中的所有日记条目
         historyViewModel.getAllEntries().observe(getViewLifecycleOwner(), moodEntries -> {
